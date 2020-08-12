@@ -5,25 +5,15 @@ class MyProfile extends Component {
   state = {
     name:'',
     description:'',
-    readTerm:false,
+    readTerm:'',
   };
-  handleNameChange = (event) => {
-    this.setState({
-      name: event.target.value,
-    });
-  }
 
-  handleDescriptionChange = (event) => {
+  handleChange = (field, event) => {
     this.setState({
-      description: event.target.value,
+      [field]: event.target.value,
     });
-  }
+  };
 
-  handleReadTermChange  = () => {
-    this.setState({
-      readTerm:true,
-    });
-  }
   handleSubmit = (event) => {
     event.preventDefault(event);
     console.log(this.state.name);
@@ -31,11 +21,11 @@ class MyProfile extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit}>
         <h1 className="header">My Profile</h1>
         <label className="label">Name</label>
         <br />
-        <input className="name" type="text" value={this.state.name} onChange={this.handleNameChange} />
+        <input className="name" type="text" value={this.state.name} onChange={(evnet) => this.handleChange("name",event)} />
         <br />
         <label className="label">Gender</label>
         <br />
@@ -46,9 +36,9 @@ class MyProfile extends Component {
         <br />
         <label className="label">Description</label>
         <br />
-        <input className="name" type="text" value={this.state.description} onChange={this.handleDescriptionChange} />
+        <input className="Description" type="text" value={this.state.description} onChange={(evnet) => this.handleChange("description",event)} />
         <br />
-        <input className="readTerm" type="checkbox" onChange={this.handleReadTermChange} />I have read the terms of conduct
+        <input className="readTerm" type="checkbox" onChange={(evnet) => this.handleChange("readTerm",event)} /> I have read the terms of conduct
         <br />
         <input className="submit" type="submit" disabled={!this.state.name || !this.state.description || !this.state.readTerm} />
       </form>
